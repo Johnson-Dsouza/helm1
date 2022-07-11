@@ -1,0 +1,56 @@
+---
+# Default values for Helm.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: johnson
+  tag: latest
+  pullPolicy: Never
+
+phpService:
+  name: php-fpm-nginx
+  type: LoadBalancer
+  session: None
+  externalPort: 80
+  internalPort: 8080
+
+mysqlService:
+  name: mysql
+  targetPort: 3306
+
+env:
+  - name: "DB_SERVER"
+    value: "{{include 'helm1.fullname' .}}-phpmysql"
+
+persistence:
+  accessMode: ReadWriteOnce
+  enabled: true
+  size: 1Gi
+  storageClass: standard
+
+ingress:
+  enabled: false
+  hosts:
+    - chart-example.local
+  annotations:
+
+  tls:
+
+
+config:
+  nginx.conf: |-
+    server {
+      listen 0.0.0.0:8080;
+      root /app;
+      loation / {
+      index index.php;
+      }
+      location ~ \.php$ {
+        fastcgi_pass phpfpm-php-app-phpfpm:9000;
+        fastcgi_index index_php;
+        include fastcgi.conf;
+      }
+    }

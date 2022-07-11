@@ -1,0 +1,78 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{include "helm1.fullname" .}}-php
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: {{include "helm1.fullname" .}}-php
+  replicas: {{.Values.replicaCount}}
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: {{include "helm1.fullname" .}}-php
+    spec:
+      containers:
+        - name: {{include "helm1.fullname" .}}-php-fpm
+          image: {{.Values.image.repository}}
+          imagePullPolicy: {{.Values.image.pullPolicy}}
+          volumeMounts:
+            - name: shared-files
+              mountPath: /var/www/html
+            - name: nginx-config-volume
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf
+        - name: {{include "helm1.fullname" .}}-php-nginx
+          image: nginx:latest
+          volumeMounts:
+            - name: shared-files
+              mountPath: /var/www/html
+            - name: nginx-config-volume
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf
+      volumes:
+        - name: shared-files
+          emptyDir: {}
+
+        - name: nginx-config-volume
+          configMap:
+            name: nginx-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{include "helm1.fullname" .}}-mysql
+  labels:
+    charts: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+spec:
+  selector:
+    matchLabels:
+      app: {{include "helm1.fullname" .}}-mysql
+  replicas: {{.Values.replicaCount}}
+  template:
+    metadata:
+      labels:
+        app: {{include "helm1.fullname" .}}-mysql
+    spec:
+      containers:
+        - name: {{include "helm1.fullname" .}}-mysql
+          image: mysql
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "pass"
+          volumeMounts:
+            - name: mysql-initdb
+              mountPath: /docker-entrypoint-initdb.d
+      volumes:
+        - name: mysql-initdb
+          configMap:
+            name: mysql-initdb-config
