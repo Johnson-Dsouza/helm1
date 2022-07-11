@@ -24,6 +24,7 @@
     </script>
 </head>
 <body>
+    <php echo $DB_SERVER; ?>
     <div class="wrapper">
         <div class="container-fluid">
             <div class="row">
