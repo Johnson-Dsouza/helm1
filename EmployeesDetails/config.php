@@ -3,7 +3,7 @@
 #$SERVERNAME = $_ENV["SERVER_NAME"];
 $SERVERNAME = getenv('SERVER_NAME');
 
-define('DB_SERVER', '$SERVERNAME');
+define('DB_SERVER', $SERVERNAME);
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', 'pass');
 define('DB_NAME', 'emp_demo_database');
