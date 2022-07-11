@@ -115,6 +115,6 @@ kind: ConfigMap
 apiVersion: v1
 metadata:
   name: www-conf
-  data:
-    www.conf: | 
-      clear_env = no
+data:
+  www.conf: | 
+    clear_env = no
