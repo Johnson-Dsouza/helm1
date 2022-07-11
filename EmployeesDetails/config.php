@@ -1,6 +1,7 @@
 <?php
 
-$SERVERNAME = $_ENV["SERVER_NAME"];
+#$SERVERNAME = $_ENV["SERVER_NAME"];
+$SERVERNAME = getenv('SERVER_NAME');
 
 define('DB_SERVER', '$SERVERNAME');
 define('DB_USERNAME', 'root');
