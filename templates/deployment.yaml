@@ -70,7 +70,7 @@ spec:
             - name: MYSQL_ROOT_PASSWORD
               value: "pass"
             - name: SERVER_NAME
-              value: "{{include 'helm1.fullname' .}}-phpmysql" 
+              value: '{{include "helm1.fullname" .}}-phpmysql' 
           volumeMounts:
             - name: mysql-initdb
               mountPath: /docker-entrypoint-initdb.d
