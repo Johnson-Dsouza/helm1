@@ -28,7 +28,7 @@ mysqlService:
 #         name: metadata
 #         key: name
 env:
- - name: SERVER_NAME
+ - name: $_SERVER
    value: {{ include "helm1.fullname" .}}-phpmysql
 
 persistence:
