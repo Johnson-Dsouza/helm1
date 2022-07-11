@@ -25,7 +25,7 @@
 </head>
 <body>
     
-    <?php echo getenv('SERVER_NAME'); ?>
+    <?php echo getenv('HELM_HELM1_PHPMYSQL_SERVICE_HOST'); ?>
     <div class="wrapper">
         <div class="container-fluid">
             <div class="row">

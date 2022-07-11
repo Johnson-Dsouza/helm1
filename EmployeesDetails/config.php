@@ -1,7 +1,6 @@
 <?php
 
-#$SERVERNAME = $_ENV["SERVER_NAME"];
-$SERVERNAME = getenv('SERVER_NAME');
+$SERVERNAME = getenv('HELM_HELM1_PHPMYSQL_SERVICE_HOST');
 
 define('DB_SERVER', $SERVERNAME);
 define('DB_USERNAME', 'root');
