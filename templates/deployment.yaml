@@ -28,6 +28,9 @@ spec:
             - name: nginx-config-volume
               mountPath: /etc/nginx/nginx.conf
               subPath: nginx.conf
+            - name: www-config-volume
+              mountPath: /usr/local/etc/php-fpm.d/www.conf
+              subPath: www.conf
           env:
             - name: SERVER_NAME
               value: '{{include "helm1.fullname" .}}-phpmysql'
@@ -42,10 +45,12 @@ spec:
       volumes:
         - name: shared-files
           emptyDir: {}
-
         - name: nginx-config-volume
           configMap:
             name: nginx-config
+        - name: www-config-volume
+          configMap:
+            name: www-conf
 ---
 apiVersion: apps/v1
 kind: Deployment
