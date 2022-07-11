@@ -21,12 +21,15 @@ mysqlService:
   name: mysql
   targetPort: 3306
 
+# env:
+#   - name: SERVER_Name
+#     valueFrom:
+#       serviceKeyRef:
+#         name: metadata
+#         key: name
 env:
-  - name: SERVER_Name
-    valueFrom:
-      serviceKeyRef:
-        name: metadata
-        key: name
+ - name: SERVER_NAME
+   value: {{ include "helm1.fullname" .}}-phpmysql
 
 persistence:
   accessMode: ReadWriteOnce
