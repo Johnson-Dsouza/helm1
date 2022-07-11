@@ -1,5 +1,5 @@
 <?php
-define('DB_SERVER', '$_SERVER["{{.Values.env.value}}"]');
+define('DB_SERVER', '$_SERVER["SERVER_NAME"]');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', 'pass');
 define('DB_NAME', 'emp_demo_database');
