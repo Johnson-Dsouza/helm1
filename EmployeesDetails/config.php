@@ -1,5 +1,7 @@
 <?php
-define('DB_SERVER', 'helm1-1657527067-phpmysql');
+
+
+define('DB_SERVER', '$_ENV["SERVER_NAME"]');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', 'pass');
 define('DB_NAME', 'emp_demo_database');
