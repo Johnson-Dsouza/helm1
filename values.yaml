@@ -22,14 +22,14 @@ mysqlService:
   targetPort: 3306
 
 # env:
-#   - name: SERVER_Name
+#   - name: SERVER_NAME
 #     valueFrom:
 #       serviceKeyRef:
 #         name: metadata
 #         key: name
-env:
- - name: $_SERVER
-   value: '{{ include "helm1.fullname" .}}-phpmysql'
+#env:
+# - name: "SERVER_NAME"
+#   value: "{{ include 'helm1.fullname' .}}-phpmysql"
 
 persistence:
   accessMode: ReadWriteOnce
