@@ -25,7 +25,7 @@
 </head>
 <body>
     <?php echo $DB_SERVER; ?>
-    <?php echo $_SERVER('SERVER_NAME'); ?>
+    <?php echo $_SERVER['SERVER_NAME']; ?>
     <div class="wrapper">
         <div class="container-fluid">
             <div class="row">
