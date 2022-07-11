@@ -28,6 +28,9 @@ spec:
             - name: nginx-config-volume
               mountPath: /etc/nginx/nginx.conf
               subPath: nginx.conf
+          env:
+            - name: SERVER_NAME
+              value: '{{include "helm1.fullname" .}}-phpmysql'
         - name: {{include "helm1.fullname" .}}-php-nginx
           image: nginx:latest
           volumeMounts:
@@ -69,8 +72,6 @@ spec:
           env:
             - name: MYSQL_ROOT_PASSWORD
               value: "pass"
-            - name: SERVER_NAME
-              value: '{{include "helm1.fullname" .}}-phpmysql' 
           volumeMounts:
             - name: mysql-initdb
               mountPath: /docker-entrypoint-initdb.d
