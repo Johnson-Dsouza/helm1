@@ -29,7 +29,7 @@ mysqlService:
 #         key: name
 env:
  - name: $_SERVER
-   value: {{ include "helm1.fullname" .}}-phpmysql
+   value: '{{ include "helm1.fullname" .}}-phpmysql'
 
 persistence:
   accessMode: ReadWriteOnce
